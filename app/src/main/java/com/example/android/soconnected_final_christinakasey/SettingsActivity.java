@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SettingsActivity extends AppCompatActivity {
-    private EditText mNameField, mPhoneField;
+    private EditText mNameField, mPhoneField, mPersonalityField;
 
     private Button mBack, mConfirm;
 
@@ -50,9 +50,9 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        userPersonality = getIntent().getExtras().getString("userPersonality");
         mNameField = (EditText) findViewById(R.id.name);
         mPhoneField = (EditText) findViewById(R.id.phone);
+        mPersonalityField = (EditText) findViewById(R.id.personality);
 
         mProfileImage = (ImageView) findViewById(R.id.profileImage);
 
@@ -106,6 +106,7 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                     if(map.get("personality")!=null){
                         userPersonality = map.get("personality").toString();
+                        mPersonalityField.setText(userPersonality);
                     }
                     Glide.clear(mProfileImage);
                     if(map.get("profileImageUrl")!=null){
@@ -137,6 +138,7 @@ public class SettingsActivity extends AppCompatActivity {
         Map userInfo = new HashMap();
         userInfo.put("name", name);
         userInfo.put("phone", phone);
+        userInfo.put("personality", userPersonality);
         mUserDatabase.updateChildren(userInfo);
         if(resultUri != null){
             StorageReference filepath = FirebaseStorage.getInstance().getReference().child("profileImages").child(userId);
