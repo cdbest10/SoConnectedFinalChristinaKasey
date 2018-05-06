@@ -31,9 +31,10 @@
                 android:layout_height="107dp"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop" />
+
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:id="@+id/questions_answers"
                 android:text="answers"
                 />
